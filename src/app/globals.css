@@ -3,13 +3,39 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /*Colores segun req*/
+  --primary:   #1e293b;
+
+  --button: #1e293b;
+  --button-hover: #314158;
+  --button-focus: #1e293b;
+
+  --card: #ffffff;
+
+  --table-row: #f9fafb;
+  --table-hover: #f4f7fd;
+  --table-grid: #f4f7fd;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--primary); 
+  
+  --color-button-hover: var(--button-hover);
+  --color-button-focus: var(--button-focus);
+
+  --color-table-row: var(--table-row);
+  --color-table-hover: var(--table-hover);
+  --color-table-grid: var(--table-grid);
+
+  --color-card: var(--card)
+
 }
 
 @media (prefers-color-scheme: dark) {
