@@ -19,13 +19,11 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // Ajusta la URL según el puerto de tu backend (ej. 3001)
       const res = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        // ¡CRÍTICO! Esto permite que el navegador guarde la cookie httpOnly
         credentials: "include", 
         body: JSON.stringify({ email, password }),
       });
@@ -36,11 +34,15 @@ export default function LoginPage() {
         throw new Error(data.message || "Error al iniciar sesión");
       }
 
-      // Si es exitoso, la cookie ya se guardó en el navegador.
-      // Redirigimos al dashboard.
-      router.push("/dashboard");
-      router.refresh(); // Fuerza a Next.js a re-evaluar el estado del servidor
-
+      // LÓGICA DE 2FA:
+      // El backend debe retornar algo como { requires2FA: true, userId: '...' }
+      // sin setear la cookie 'access_token' definitiva todavía.
+      if (data.requires2FA) {
+        router.push(`/verify-2fa?userId=${data.userId}`);
+      } else {
+        router.push("/dashboard");
+        router.refresh();
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {

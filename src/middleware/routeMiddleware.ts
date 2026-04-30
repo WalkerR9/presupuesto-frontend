@@ -6,7 +6,7 @@ export function routeMiddleware(request: NextRequest) {
   const token = request.cookies.get('access_token')?.value;
   const { pathname } = request.nextUrl;
 
-  const isPublicPath = pathname === '/login' || pathname === '/register';
+  const isPublicPath = pathname === '/login' || pathname === '/register' || pathname === '/verify-2fa';;
 
   // Si no hay token y no es ruta pública -> Al Login
   if (!token && !isPublicPath) {

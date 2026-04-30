@@ -20,19 +20,22 @@ export function Sidebar() {
   const router = useRouter(); // Inicializa el router
 
   const handleLogout = async () => {
-    try {
-      // Llamamos a nuestra API de Next.js que borra la cookie
-      const res = await fetch('/api/logout', { method: 'POST' });
-      
-      if (res.ok) {
-        // Limpiamos cualquier rastro y mandamos al login
-        // Usamos window.location para asegurar un "reset" total del estado
-        window.location.href = '/login'; 
-      }
-    } catch (error) {
-      console.error("Error al cerrar sesión", error);
+  try {
+    const res = await fetch("http://localhost:3000/api/auth/logout", {
+      method: "POST",
+      credentials: "include", 
+    });
+
+    if (res.ok) {
+      // Opción A: Redirección total (limpia caché y estado de React)
+      window.location.href = "/login";
+    } else {
+      console.error("El servidor respondió con error");
     }
-  };
+  } catch (error) {
+    console.error("Error de conexión:", error);
+  }
+};
 
   return (
     <aside 
