@@ -1,9 +1,9 @@
-// src/middleware.ts
+ // src/middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { routeMiddleware } from './middleware/routeMiddleware';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // 1. Ejecutar el middleware de rutas/auth
   const routeResponse = routeMiddleware(request);
   
